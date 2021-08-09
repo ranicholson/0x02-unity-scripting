@@ -14,9 +14,17 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb = GetComponent<Rigidbody>();
-        Vector3 playerMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        rb.MovePosition(transform.position + playerMovement * Time.deltaTime * speed);
+        if (Input.GetKey("d") || Input.GetKey("right"))
+            rb.AddForce(speed * Time.deltaTime, 0, 0);
+        
+        if (Input.GetKey("a") || Input.GetKey("left"))
+            rb.AddForce(-speed * Time.deltaTime, 0, 0);
+        
+        if (Input.GetKey("w") ||  Input.GetKey("up"))
+            rb.AddForce(0, 0, speed * Time.deltaTime);
+        
+        if (Input.GetKey("s") || Input.GetKey("down"))
+            rb.AddForce(0, 0, -speed * Time.deltaTime);
     }
 
     // Update is called once per frame
